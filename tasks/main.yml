@@ -1,2 +1,5 @@
 ---
 # tasks file for ec2-vpc-endpoints
+
+- include_tasks: vpc-route-table.yml
+
