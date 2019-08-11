@@ -11,13 +11,13 @@ Boto is required for this module.
 Role Variables
 --------------
 
-ec2_gw_endpoints: A list of the gateway type endpoints to create. The only
-                  2 types are s3 and DynamoDB
-ec2_if_endpoints: A list of the interface type endpoints to create.
-sec_group_names: A list of security groups to attach to an interface type
-                 endpoint.
-subnet_names: A list of subnet names that will have the interface endpoint
-              type created in.
+  - ec2_gw_endpoints: A list of the gateway type endpoints to create. The only
+                      2 types are s3 and DynamoDB
+  - ec2_if_endpoints: A list of the interface type endpoints to create.
+  - sec_group_names: A list of security groups to attach to an interface type
+                     endpoint.
+  - subnet_names: A list of subnet names that will have the interface endpoint
+                  type created in.
              
 
 Dependencies
