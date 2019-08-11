@@ -12,7 +12,7 @@ ANSIBLE_METADATA = {'metadata_version': '1.1',
 
 
 DOCUMENTATION = '''
-module: ec2_vpc_endpoint
+module: ec2_vpc_endpoints
 short_description: Create and delete AWS VPC Endpoints.
 description:
   - Creates AWS VPC endpoints.
@@ -27,7 +27,7 @@ options:
     required: false
   service:
     description:
-      - An AWS supported vpc endpoint service. Use the ec2_vpc_endpoint_facts
+      - An AWS supported vpc endpoint service. Use the ec2_vpc_endpoints_facts
         module to describe the supported endpoint services.
       - Required when creating an endpoint.
     required: false
@@ -107,7 +107,7 @@ EXAMPLES = '''
 # Note: These examples do not set authentication details, see the AWS Guide for details.
 
 - name: Create new vpc endpoint with a json template for policy
-  ec2_vpc_endpoint:
+  ec2_vpc_endpoints:
     state: present
     region: ap-southeast-2
     vpc_id: vpc-12345678
@@ -119,7 +119,7 @@ EXAMPLES = '''
   register: new_vpc_endpoint
 
 - name: Create new vpc endpoint the default policy
-  ec2_vpc_endpoint:
+  ec2_vpc_endpoints:
     state: present
     region: ap-southeast-2
     vpc_id: vpc-12345678
@@ -130,7 +130,7 @@ EXAMPLES = '''
   register: new_vpc_endpoint
 
 - name: Create new vpc endpoint with json file
-  ec2_vpc_endpoint:
+  ec2_vpc_endpoints:
     state: present
     region: ap-southeast-2
     vpc_id: vpc-12345678
@@ -142,7 +142,7 @@ EXAMPLES = '''
   register: new_vpc_endpoint
 
 - name: Delete newly created vpc endpoint
-  ec2_vpc_endpoint:
+  ec2_vpc_endpoints:
     state: absent
     nat_gateway_id: "{{ new_vpc_endpoint.result['VpcEndpointId'] }}"
     region: ap-southeast-2
