@@ -5,5 +5,7 @@
   when: ec2_gw_endpoints is defined
 - include_tasks: security_groups.yml
   when: ec2_if_endpoints is defined
+- include_tasks: subnets.yml
+  when: ec2_if_endpoints is defined
 - include_tasks: endpoint.yml
 

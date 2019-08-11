@@ -1,0 +1,16 @@
+---
+
+- name: Get Subnet facts from Name tags
+  ec2_vpc_subnet_facts:
+    region: "{{ region }}"
+    filters:
+      vpc-id: "{{ vpc_id }}"
+      "tag:Name": "{{ item }}"
+  with_items: "{{ subnet_names }}"
+  register: ec2_subnets
+
+- name: Set Subnet ID's in fact
+  set_fact:
+    subnet_ids: "{{ ec2_subnets.results|map(attribute='subnets.0.id')|list }}"
+  when: ec2_subnets.results is defined
+
