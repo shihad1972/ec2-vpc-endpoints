@@ -8,4 +8,4 @@
 - include_tasks: subnets.yml
   when: ec2_if_endpoints is defined
 - include_tasks: endpoint.yml
-  when: bootstrap
+  when: bootstrap|bool
