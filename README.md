@@ -1,38 +1,57 @@
-Role Name
+ec2-vpc-endpoint
 =========
 
-A brief description of the role goes here.
+Create endpoints within an AWS VPC.
 
 Requirements
 ------------
 
-Any pre-requisites that may not be covered by Ansible itself or the role should be mentioned here. For instance, if the role uses the EC2 module, it may be a good idea to mention in this section that the boto package is required.
+Boto is required for this module.
 
 Role Variables
 --------------
 
-A description of the settable variables for this role should go here, including any variables that are in defaults/main.yml, vars/main.yml, and any variables that can/should be set via parameters to the role. Any variables that are read from other roles and/or the global scope (ie. hostvars, group vars, etc.) should be mentioned here as well.
+ec2_gw_endpoints: A list of the gateway type endpoints to create. The only
+                  2 types are s3 and DynamoDB
+ec2_if_endpoints: A list of the interface type endpoints to create.
+sec_group_names: A list of security groups to attach to an interface type
+                 endpoint.
+subnet_names: A list of subnet names that will have the interface endpoint
+              type created in.
+             
 
 Dependencies
 ------------
 
-A list of other roles hosted on Galaxy should go here, plus any details in regards to parameters that may need to be set for other roles, or variables that are used from other roles.
+There are no dependencies for this role.
 
 Example Playbook
 ----------------
 
 Including an example of how to use your role (for instance, with variables passed in as parameters) is always nice for users too:
 
-    - hosts: servers
+    - hosts: localhost
+      vars:
+        region: eu-west-1
+        ec2_endpoints:
+          - "com.amazonaws.{{ region }}.ec2"
+        sec_group_names:
+          - VPC Endpoints
+        subnet_names:
+          - Application Private a
+          - Application Private b
       roles:
-         - { role: username.rolename, x: 42 }
+         - { role: ec2-vpc-endpoint,
+               ec2_if_endpoints: "{{ ec2_endpoints }}",
+               sec_group_names: "{{ ec2_security_groups }}",
+               subnet_names: "{{ ec2_subnets }}" }
 
 License
 -------
 
-BSD
+GPLv3
 
 Author Information
 ------------------
 
-An optional section for the role authors to include contact information, or a website (HTML is not allowed).
+Iain M Conochie <iain-at-thargoid-dot-co-dot-uk>
