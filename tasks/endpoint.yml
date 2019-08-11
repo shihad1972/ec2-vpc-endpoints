@@ -19,5 +19,6 @@
     service: "{{ item }}"
     endpoint_type: Interface
     security_group_ids: "{{ sg_ids }}"
+    subnet_ids: "{{ subnet_ids }}"
   loop: "{{ ec2_if_endpoints }}"
   when: ec2_if_endpoints is defined
