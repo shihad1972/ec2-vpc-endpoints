@@ -20,3 +20,6 @@
       vpc_id: "{{ vpc_id }}"
   register: ec2_table
 
+- name: Create list of route tables
+  set_fact:
+    route_table_ids: "{{ ec2_table.route_tables|map(attribute='id')|list }}"

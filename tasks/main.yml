@@ -2,4 +2,8 @@
 # tasks file for ec2-vpc-endpoints
 
 - include_tasks: vpc-route-table.yml
+  when: ec2_gw_endpoints is defined
+- include_tasks: security_groups.yml
+  when: ec2_if_endpoints is defined
+- include_tasks: endpoint.yml
 

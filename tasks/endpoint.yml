@@ -1,0 +1,23 @@
+---
+
+- name: Create ec2 Gateway endpoints
+  ec2_vpc_endpoint:
+    state: "{{ ec2_vpc_endpoint_state|default('present') }}"
+    region: "{{ region }}"
+    vpc_id: "{{ vpc_id }}"
+    service: "{{ item }}"
+    endpoint_type: Gateway
+    route_table_ids: "{{ route_table_ids }}"
+  loop: "{{ ec2_gw_endpoints }}"
+  when: ec2_gw_endpoints is defined
+
+- name: Create ec2 Interface endpoints
+  ec2_vpc_endpoint:
+    state: "{{ ec2_vpc_endpoint_state|default('present') }}"
+    region: "{{ region }}"
+    vpc_id: "{{ vpc_id }}"
+    service: "{{ item.name }}"
+    endpoint_type: Interface
+    security_group_ids: "{{ item.sg_ids }}"
+  loop: "{{ ec2_if_endpoints }}"
+  when: ec2_if_endpoints is defined

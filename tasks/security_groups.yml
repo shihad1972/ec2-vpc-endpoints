@@ -1,0 +1,15 @@
+---
+
+- name: Get security groups on name
+  ec2_group_facts:
+    region: "{{ region }}"
+    filters:
+      group-name: "{{ sec_group_names }}"
+  register: aws_groups
+
+#- debug: var=aws_groups
+
+- name: Set Security group ID's in fact
+  set_fact:
+    sg_ids: "{{ aws_groups.security_groups|map(attribute='group_id')|list }}"
+
